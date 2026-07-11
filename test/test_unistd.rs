@@ -1077,12 +1077,8 @@ fn test_linkat_newdirfd_none() {
 }
 
 #[test]
-#[cfg(not(any(
-    apple_targets,
-    target_os = "redox",
-    target_os = "haiku",
-    target_os = "emscripten"
-)))]
+#[cfg(not(any(apple_targets, target_os = "redox", target_os = "haiku")))]
+#[cfg_attr(target_os = "emscripten", ignore)]
 fn test_linkat_no_follow_symlink() {
     use nix::fcntl::AtFlags;
     use nix::fcntl::AT_FDCWD;

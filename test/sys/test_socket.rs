@@ -1,7 +1,6 @@
 #[cfg(linux_android)]
 use crate::*;
 use libc::c_char;
-#[cfg_attr(target_os = "emscripten", allow(unused_imports))]
 use nix::sys::socket::{getsockname, AddressFamily, UnixAddr};
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
@@ -287,7 +286,7 @@ pub fn test_unnamed_uds_addr() {
 }
 
 #[test]
-#[cfg(not(target_os = "emscripten"))]
+#[cfg_attr(target_os = "emscripten", ignore)]
 pub fn test_getsockname() {
     use nix::sys::socket::bind;
     use nix::sys::socket::{socket, AddressFamily, SockFlag, SockType};
@@ -310,7 +309,7 @@ pub fn test_getsockname() {
 }
 
 #[test]
-#[cfg(not(target_os = "emscripten"))]
+#[cfg_attr(target_os = "emscripten", ignore)]
 pub fn test_socketpair() {
     use nix::sys::socket::{socketpair, AddressFamily, SockFlag, SockType};
     use nix::unistd::{read, write};
